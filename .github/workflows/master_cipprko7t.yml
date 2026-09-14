@@ -17,7 +17,15 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: 'Checkout GitHub Action'
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      # Concatenates each module's Public/*.ps1 files into a single .psm1 and
+      # generates Config/function-permissions.json. Without this the modules
+      # deploy in source form and every cold start dot-sources 2138 files
+      # individually off the Azure Files content share.
+      - name: 'Build and stage modules'
+        shell: pwsh
+        run: ./Tools/Build-DevApiModules.ps1
 
       - name: 'Run Azure Functions Action'
         uses: Azure/functions-action@v1
@@ -27,3 +35,4 @@ jobs:
           slot-name: 'Production'
           package: ${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_18288DA7FB124EA9AD33BC06568A6550 }}
+          respect-funcignore: true

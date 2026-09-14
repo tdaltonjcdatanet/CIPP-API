@@ -1,0 +1,25 @@
+# Excluded from the deployment package by Azure/functions-action
+# (requires respect-funcignore: true in the workflow).
+# Nothing here is read at runtime by the function app.
+
+.git
+.github
+.vscode
+.build
+Tests
+Tools
+Output
+.DS_Store
+.dockerignore
+.editorconfig
+.env.example
+.gitattributes
+.gitignore
+.redocly.lint-ignore.yaml
+redocly.yaml
+cspell.json
+Dockerfile
+docker-compose.yml
+nginx.conf
+license.md
+LICENSE.CustomLicenses

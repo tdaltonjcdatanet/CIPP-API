@@ -9,5 +9,7 @@
 
 *.json        text eol=lf
 
+.funcignore   text eol=lf
+
 *.png  binary
 *.jpg  binary
